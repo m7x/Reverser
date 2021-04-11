@@ -251,7 +251,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-i","--interface",help="Specify interface (Default eth0)")
     parser.add_argument("-a","--address",help="Specify IP address")
-    parser.add_argument("-p","--port",help="Specify Port to listen (Default 8080)",default="8080")
+    parser.add_argument("-p","--port",help="Specify Port to listen (Default 80)",default="80")
     parser.add_argument("-f","--file",help="Specify file to download or execute (Default file)",default="file")
     parser.add_argument("-P","--proxy",help="Specify proxy settings ie: 127.0.0.1:8888 (Default None)",default=None)
     parser.add_argument("-c","--creds",help="Specify creds for proxy ie: [domain]\\username:password",default=None)
